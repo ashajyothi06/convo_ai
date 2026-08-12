@@ -13,13 +13,13 @@ export type TranscriptTurn = {
   response_id?: string | null;
 };
 
-export type AppointmentSummary = {
+export type PanditBookingSummary = {
   name: string | null;
   phone: string | null;
-  purpose: string | null;
-  date: string | null;
-  time: string | null;
-  remarks: string | null;
+  service: string | null;
+  schedule: string | null;
+  duration: string | null;
+  address: string | null;
 };
 
 export type VoiceConfig = {
@@ -38,5 +38,5 @@ export type LoginResponse = {
 
 export type CallStartResponse = {
   call_id: string;
-  public_summary: AppointmentSummary;
+  public_summary: PanditBookingSummary;
 };

@@ -1,23 +1,22 @@
 import {
   ArrowRight,
-  CalendarDays,
+  CalendarClock,
   Check,
   ChevronDown,
-  Clock3,
   Eye,
   EyeOff,
   Headphones,
   LockKeyhole,
   LogOut,
   Menu,
-  MessageSquareText,
+  MapPin,
   Mic,
   MicOff,
   Phone,
   Power,
   ShieldCheck,
   Sparkles,
-  Stethoscope,
+  Timer,
   UserRound,
   Volume2
 } from "lucide-react";
@@ -48,18 +47,18 @@ import {
 } from "./qwenRealtime";
 
 import type {
-  AppointmentSummary,
+  PanditBookingSummary,
   TranscriptTurn,
   User
 } from "./types";
 
-const EMPTY_SUMMARY: AppointmentSummary = {
+const EMPTY_BOOKING_SUMMARY: PanditBookingSummary = {
   name: null,
   phone: null,
-  purpose: null,
-  date: null,
-  time: null,
-  remarks: null
+  service: null,
+  schedule: null,
+  duration: null,
+  address: null
 };
 
 function LoginPage({
@@ -133,11 +132,11 @@ function LoginPage({
 
             <div>
               <strong>
-                Gyaini Voice
+                Arya Samaj Seva
               </strong>
 
               <small>
-                Intelligent appointment assistant
+                Pandit booking assistant
               </small>
             </div>
           </div>
@@ -149,9 +148,9 @@ function LoginPage({
             </span>
 
             <h1>
-              A simpler way to
+              Book a Pandit for
               <span>
-                arrange care.
+                your sacred rituals.
               </span>
             </h1>
 
@@ -171,11 +170,11 @@ function LoginPage({
 
               <div>
                 <strong>
-                  Natural voice interaction
+                  Natural voice booking
                 </strong>
 
                 <small>
-                  Talk instead of filling long forms.
+                  Tell Veda the ritual, schedule and service address.
                 </small>
               </div>
             </div>
@@ -187,11 +186,11 @@ function LoginPage({
 
               <div>
                 <strong>
-                  Protected session
+                  Private booking session
                 </strong>
 
                 <small>
-                  Authentication is required before a call starts.
+                  Sign-in is required before booking details are collected.
                 </small>
               </div>
             </div>
@@ -430,8 +429,8 @@ function VoicePage({
   onLogout: () => void;
 }) {
   const [summary, setSummary] =
-    useState<AppointmentSummary>(
-      EMPTY_SUMMARY
+    useState<PanditBookingSummary>(
+      EMPTY_BOOKING_SUMMARY
     );
 
   const [turns, setTurns] =
@@ -544,10 +543,10 @@ function VoicePage({
         [
           summary.name,
           summary.phone,
-          summary.purpose,
-          summary.date,
-          summary.time,
-          summary.remarks
+          summary.service,
+          summary.schedule,
+          summary.duration,
+          summary.address
         ].filter(Boolean).length,
       [summary]
     );
@@ -618,7 +617,7 @@ function VoicePage({
 
       setSummary(
         call.public_summary ||
-        EMPTY_SUMMARY
+        EMPTY_BOOKING_SUMMARY
       );
 
       setTurns([]);
@@ -889,12 +888,12 @@ function VoicePage({
           >
             <div>
               <h2>
-                Appointment Summary
+                Pandit Booking Summary
               </h2>
 
               <p>
                 {completedCount}/6
-                details confirmed
+                booking details confirmed
               </p>
             </div>
 
@@ -932,42 +931,42 @@ function VoicePage({
 
               <AppointmentRow
                 icon={
-                  <Stethoscope
+                  <Sparkles
                     size={20}
                   />
                 }
-                label="Purpose"
-                value={summary.purpose}
+                label="Ritual / Service"
+                value={summary.service}
               />
 
               <AppointmentRow
                 icon={
-                  <CalendarDays
+                  <CalendarClock
                     size={20}
                   />
                 }
-                label="Date"
-                value={summary.date}
+                label="Schedule"
+                value={summary.schedule}
               />
 
               <AppointmentRow
                 icon={
-                  <Clock3
+                  <Timer
                     size={20}
                   />
                 }
-                label="Time"
-                value={summary.time}
+                label="Duration"
+                value={summary.duration}
               />
 
               <AppointmentRow
                 icon={
-                  <MessageSquareText
+                  <MapPin
                     size={20}
                   />
                 }
-                label="Remarks"
-                value={summary.remarks}
+                label="Address"
+                value={summary.address}
               />
             </div>
           )}

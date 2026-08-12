@@ -1,5 +1,5 @@
 import type {
-  AppointmentSummary,
+  PanditBookingSummary,
   CallStartResponse,
   LoginResponse,
   TranscriptTurn,
@@ -102,10 +102,10 @@ export async function exchangeSdp(callId: string, offerSdp: string): Promise<str
 export async function sendTurn(
   callId: string,
   turn: TranscriptTurn
-): Promise<AppointmentSummary> {
+): Promise<PanditBookingSummary> {
   const result = await request<{
     status: string;
-    public_summary: AppointmentSummary;
+    public_summary: PanditBookingSummary;
   }>("/api/calls/turn", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -115,8 +115,8 @@ export async function sendTurn(
   return result.public_summary;
 }
 
-export async function getSummary(callId: string): Promise<AppointmentSummary> {
-  const result = await request<{ public_summary: AppointmentSummary }>(
+export async function getSummary(callId: string): Promise<PanditBookingSummary> {
+  const result = await request<{ public_summary: PanditBookingSummary }>(
     `/api/calls/${encodeURIComponent(callId)}/summary`
   );
   return result.public_summary;
