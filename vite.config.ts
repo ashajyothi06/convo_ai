@@ -11,8 +11,9 @@ export default defineConfig({
 
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:1880",
+        target: "https://gyaini.com:6880",
         changeOrigin: true,
+        secure: false,
       },
     },
   },
